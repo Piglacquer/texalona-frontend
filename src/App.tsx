@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import withFirebaseAuth, { WrappedComponentProps } from 'react-with-firebase-auth'
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import firebaseConfig from './firebaseConfig';
+import LoginPage from './LoginPage';
 
-const App: React.FC = () => {
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+const firebaseAppAuth = firebaseApp.auth();
+
+const providers:Object = {
+  googleProvider: new firebase.auth.EmailAuthProvider(),
+};
+
+const App = ({user, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut}: WrappedComponentProps) => {
+  console.warn('yeet signInWithEmailAndPassword, signOut', signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <LoginPage />
     </div>
   );
 }
 
-export default App;
+export default withFirebaseAuth({
+  providers,
+  firebaseAppAuth,
+})(App);
