@@ -23,11 +23,17 @@ const LoginPage = (props:any) => {
 		signIn(username, password).then((resp:any) => console.warn(resp));
 	}
 
+	const handleSignOut = () => {
+		const { signOut } = props;
+		signOut();
+	}
+
 	return (
 		<div>
 			<input type="text" value={username} onChange={e => handleUsernameChange(e.target.value)}/>
 			<input type="text" value={password} onChange={e => handlePasswordChange(e.target.value)} />
 			<button onClick={handleSignIn}>login</button>
+			<button onClick={handleSignOut}>logout</button>
 		</div>
 	)
 };

@@ -30,7 +30,7 @@ const App = ({user, createUserWithEmailAndPassword, signInWithEmailAndPassword, 
 
   return (
     <div className="App">
-      <AppRouter />
+      <AppRouter user={user}/>
       <Modal
         open={open}
         onClose={handleCloseModal}
@@ -40,7 +40,7 @@ const App = ({user, createUserWithEmailAndPassword, signInWithEmailAndPassword, 
           width: '50vw',
           height: '50vh',
         }}>
-          <LoginPage signIn={signInWithEmailAndPassword} />
+          <LoginPage signIn={signInWithEmailAndPassword} signOut={signOut} />
         </div>
 
       </Modal>
